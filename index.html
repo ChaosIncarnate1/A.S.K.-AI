@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A.S.K. AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Young+Serif&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=3">
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<main id="auth" class="auth hidden">
+  <form id="authForm" class="auth-card">
+    <div class="mark"><i></i><i></i></div>
+    <h1>A.S.K. AI</h1>
+    <p class="sub">Say what you think. Be ready to defend it.</p>
+    <label id="nameRow">Name<input id="name" autocomplete="name"></label>
+    <label>Email<input id="email" type="email" autocomplete="email" required></label>
+    <label>Password<input id="password" type="password" autocomplete="current-password" minlength="8" required></label>
+    <p id="authErr" class="err" role="alert"></p>
+    <button class="primary" id="authBtn">Log in</button>
+    <button type="button" class="link" id="authSwap">New here? Create an account</button>
+  </form>
+</main>
+
+<div id="app" class="app hidden">
+  <aside class="side">
+    <a class="brand" id="brand" href="#" title="Start a new discussion"><div class="mark sm"><i></i><i></i></div>A.S.K. AI</a>
+    <button class="primary new" id="newChat">New discussion</button>
+    <nav id="chatList" class="chat-list"></nav>
+    <div class="side-foot">
+      <a id="usersLink" href="#/users" class="hidden">User database</a>
+      <div class="who"><span id="who"></span><button class="link" id="logout">Log out</button></div>
+    </div>
+  </aside>
+
+  <section id="chatView" class="main">
+    <div id="stream" class="stream">
+      <div id="empty" class="empty"><h2>What's your position?</h2><p>Make a claim. I'll test it.</p></div>
+    </div>
+    <form id="composer" class="composer">
+      <textarea id="input" rows="1" placeholder="State a view you hold" aria-label="Message"></textarea>
+      <a href="#/search" class="engine" aria-label="Search engine settings" title="Search engine settings">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h9l2 2h2v7H8l-2-2z"/><path d="M10 8V6h4v2"/><path d="M3 11v4M19 10V8h2"/><circle cx="12" cy="13" r="1.6"/></svg>
+      </a>
+      <button class="send" aria-label="Send">&#8593;</button>
+    </form>
+  </section>
+
+  <section id="searchView" class="main admin hidden">
+    <div class="admin-wrap">
+      <a href="#" class="link back">Back to chat</a>
+      <h2>Search engine settings</h2>
+      <p class="sub">How the evidence engine ranks the web. Everyone can see these settings; only admins can change them.</p>
+      <label>Visibility boost for lower-ranked sites
+        <input id="boost" type="range" min="0" max="1" step="0.05"><output id="boostOut"></output></label>
+      <label>Results per query<input id="maxRes" type="number" min="1" max="30"></label>
+      <label>Blocked domains, one per line<textarea id="blocked" rows="5"></textarea></label>
+      <p id="adminMsg" class="sub" role="status"></p>
+      <button class="primary" id="saveCfg">Save settings</button>
+    </div>
+  </section>
+
+  <section id="usersView" class="main admin hidden">
+    <div class="admin-wrap wide">
+      <a href="#" class="link back">Back to chat</a>
+      <h2>User database</h2>
+      <p class="sub">Admin only. Everyone registered on A.S.K. AI is listed here.</p>
+      <p id="usersMsg" class="err" role="alert"></p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead>
+        <tbody id="usersBody"></tbody>
+      </table></div>
+    </div>
+  </section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
